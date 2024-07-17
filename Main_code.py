@@ -4,18 +4,10 @@ from io import StringIO
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-import random
 
 
 # A function that changes the color of a picture using the k-means algorithm
-def color_image_desert(photo, variant):
-    colors = [
-        [[239, 118, 122], [69, 105, 144], [73, 190, 170]],
-        [[255, 33, 140], [255, 216, 0], [33, 177, 255]],
-        [[233, 215, 88], [41, 115, 115], [255, 133, 82]],
-        [[254, 33, 139], [254, 215, 0], [33, 176, 254]],
-    ]
-    random_number = random.randint(0, 3)
+def color_image_desert(photo: np.ndarray, variant: str) -> np.ndarray:
     convert_photo = photo.reshape((-1, 3))
     convert_photo = np.float32(convert_photo)
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
@@ -28,14 +20,28 @@ def color_image_desert(photo, variant):
     if variant == "original":
         center = np.uint8(center)
     elif variant == "desert":
-        center = np.array([[13, 59, 102], [250, 240, 202], [244, 211, 94]])
-    elif variant == "random":
-        center = np.array(colors[random_number])
+        center = DESERT_COLOR
+    elif variant == "salat":
+        center = SALAT
+    elif variant == "orange":
+        center = ORANGE
+    elif variant == "sky":
+        center = SKY
+    elif variant == "dirty":
+        center = DIRTY
 
     # Creating the Final Image
     result = center[label.flatten()]
     result = result.reshape((photo.shape))
     return result[:, :, ::-1]
+
+
+# constants
+DESERT_COLOR = np.array([[13, 59, 102], [250, 240, 202], [244, 211, 94]])
+SALAT = np.array([[239, 118, 122], [69, 105, 144], [73, 190, 170]])
+ORANGE = np.array([[233, 215, 88], [41, 115, 115], [255, 133, 82]])
+SKY = np.array([[255, 255, 255], [255, 202, 212], [176, 208, 211]])
+DIRTY = np.array([[208, 184, 172], [243, 216, 199], [239, 229, 220]])
 
 
 # Creating a sidebar and title with text
@@ -59,7 +65,7 @@ st.sidebar.info(
 # Creating Button to select the color mode
 choose = st.radio(
     "Select color",
-    [":Documentary original", ":Documentary desert", ":Documentary random"],
+    ["original", "desert", "salat", "orange", "sky", "dirty"],
 )
 
 # Uploads an image
@@ -72,9 +78,15 @@ with placeholder.container():
         # Convert the uploaded file to normal image
         file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
         opencv_image = cv2.imdecode(file_bytes, 1)
-        if choose == ":Documentary original":
+        if choose == "original":
             st.image(color_image_desert(opencv_image, "original"), channels="BGR")
-        elif choose == ":Documentary desert":
+        elif choose == "desert":
             st.image(color_image_desert(opencv_image, "desert"), channels="BGR")
-        elif choose == ":Documentary random":
-            st.image(color_image_desert(opencv_image, "random"), channels="BGR")
+        elif choose == "salat":
+            st.image(color_image_desert(opencv_image, "salat"), channels="BGR")
+        elif choose == "orange":
+            st.image(color_image_desert(opencv_image, "orange"), channels="BGR")
+        elif choose == "sky":
+            st.image(color_image_desert(opencv_image, "sky"), channels="BGR")
+        elif choose == "dirty":
+            st.image(color_image_desert(opencv_image, "dirty"), channels="BGR")
