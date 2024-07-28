@@ -59,6 +59,14 @@ st.sidebar.info(
     desert - desert color
     
     random - random color
+    
+    salat - salat color
+    
+    orange - orange color
+    
+    sky - sky color
+    
+    dirty - dirty color
     """
 )
 
