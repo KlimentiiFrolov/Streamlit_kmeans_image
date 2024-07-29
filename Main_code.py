@@ -5,6 +5,13 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
+# constants
+DESERT_COLOR = np.array([[13, 59, 102], [250, 240, 202], [244, 211, 94]])
+SALAT = np.array([[239, 118, 122], [69, 105, 144], [73, 190, 170]])
+ORANGE = np.array([[233, 215, 88], [41, 115, 115], [255, 133, 82]])
+SKY = np.array([[255, 255, 255], [255, 202, 212], [176, 208, 211]])
+DIRTY = np.array([[208, 184, 172], [243, 216, 199], [239, 229, 220]])
+
 
 # A function that changes the color of a picture using the k-means algorithm
 def color_image_desert(photo: np.ndarray, variant: str) -> np.ndarray:
@@ -34,14 +41,6 @@ def color_image_desert(photo: np.ndarray, variant: str) -> np.ndarray:
     result = center[label.flatten()]
     result = result.reshape((photo.shape))
     return result[:, :, ::-1]
-
-
-# constants
-DESERT_COLOR = np.array([[13, 59, 102], [250, 240, 202], [244, 211, 94]])
-SALAT = np.array([[239, 118, 122], [69, 105, 144], [73, 190, 170]])
-ORANGE = np.array([[233, 215, 88], [41, 115, 115], [255, 133, 82]])
-SKY = np.array([[255, 255, 255], [255, 202, 212], [176, 208, 211]])
-DIRTY = np.array([[208, 184, 172], [243, 216, 199], [239, 229, 220]])
 
 
 # Creating a sidebar and title with text
