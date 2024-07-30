@@ -14,8 +14,8 @@
 
 ## Примеры
 
-<img src="photo/original.jpg" width="350" height="350">  
+<img src="photo\original.jpg" width="350" height="350">  
  
-<img src="photo/version_1.jpg" width="250" height="350">  
+<img src="photo\version_1.jpg" width="250" height="350">  
 
-<img src="photo/version_2.jpg" width="250" height="350">  
+<img src="photo\version_2.jpg" width="250" height="350">  
