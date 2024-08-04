@@ -69,6 +69,12 @@ st.sidebar.info(
     """
 )
 
+st.sidebar.info(
+    """
+    Web application made by Klimentii Frolov
+    """
+)
+
 # Creating Button to select the color mode
 choose = st.radio(
     "Select color",
